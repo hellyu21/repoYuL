@@ -20,5 +20,40 @@
         <input type="radio" name="type_delivery" value="deliveryman"> Доставка курьером<br>
         <button type="submit">Заказать</button>
     </form>
+    <div id="result"></div>
+    <script>
+        document.getElementById("myForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+
+            const username = this.username.value;
+            const amount = this.amount.value;
+            const model = this.model.value;
+            const build_in = this.build_in.checked;
+            const delivery = document.querySelector('input[name="type_delivery"]:checked')?.value;
+
+            if (!username || !amount || !model || !delivery) {
+                alert("Пожалуйста, заполните все обязательные поля");
+            return;
+        }
+
+            const formdata = new FormData(this);
+            let output = `<div>`;
+            output += `<p>Здравствуйте, ${username}, вы заказали:</p>`;
+            if (model == "desk_Ikea_cats") output += `<p>Рабочий стол Ikea с рисунком кота, в количестве ${amount}</p>`;
+            else if (model == "lamp_cat_peak") output += `<p>Лампа в виде горы котов, в количестве ${amount}</p>`;
+            else output += `<p>Стул в виде котенка, в количестве ${amount}</p>`;
+            
+            if (build_in) output+= `<p>Сборка включена</p>`;
+            else output += `<p>Сборка не включена</p>`;
+
+            if (delivery == "shop") output+= `<p>Доставка: Самовывоз из магазина</p>`;
+            else if (delivery == "post") output+= `<p>Доставка: Доставка почтой</p>`;
+            else output+= `<p>Доставка: Доставка курьером</p>`;
+
+            output += `<p>Спасибо за заказ!</p>`;
+
+            document.getElementById("result").innerHTML = output;
+        });
+    </script>
 </body>
 </html>
