@@ -1,2 +1,11 @@
-<?php
-phpinfo();
+<?php session_start(); ?>
+
+<?php if(isset($_SESSION['username'])): ?>
+    <p>Данные из сессии:</p>
+    <ul>
+        <li>Имя: <?= $_SESSION['username'] ?></li>
+        <li>Модель: <?= $_SESSION['model'] ?></li>
+    </ul>
+<?php else: ?>
+    <p>Данных пока нет.</p>
+<?php endif; ?>

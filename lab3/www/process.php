@@ -8,4 +8,10 @@ $_SESSION['username'] = $username;
 $_SESSION['model'] = $model;
 
 header("Location: index.php");
+$line = $username . ";" . $model . "\n";
+file_put_contents("data.txt", $line, FILE_APPEND);
+
 exit();
+
+
+
