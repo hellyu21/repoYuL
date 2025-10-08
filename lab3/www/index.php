@@ -9,3 +9,6 @@
 <?php else: ?>
     <p>Данных пока нет.</p>
 <?php endif; ?>
+
+<a href="form.html">Заполнить форму</a>
+<a href="view.php">Посмотреть все данные</a>
