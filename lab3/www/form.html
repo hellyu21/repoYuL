@@ -8,16 +8,16 @@
     <h1>Заказ мебели</h1>
     <form id="myForm" action="process.php" и method="POST">
         <input type="text" name="username" placeholder="Введите ФИО"><br>
-        <input type="number" name="amount" placeholder="Введите количество"><br>
+        <!--<input type="number" name="amount" placeholder="Введите количество"><br>-->
         <select name="model">
             <option value="desk_Ikea_cats">Рабочий стол Ikea с рисунком кота</option>
             <option value="lamp_cat_peak">Лампа в виде горы котов</option>
             <option value="chair_kitten">Стул в виде котенка</option>
         </select><br>
-        <input type="checkbox" name="build_in"> Сборка включена<br>
+        <!--<input type="checkbox" name="build_in"> Сборка включена<br>
         <input type="radio" name="type_delivery" value="shop"> Самовывоз из магазина<br>
         <input type="radio" name="type_delivery" value="post"> Доставка почтой<br>
-        <input type="radio" name="type_delivery" value="deliveryman"> Доставка курьером<br>
+        <input type="radio" name="type_delivery" value="deliveryman"> Доставка курьером<br>-->
         <button type="submit">Заказать</button>
     </form>
     <div id="result"></div>
@@ -26,25 +26,26 @@
         document.getElementById("myForm").addEventListener("submit", function(e) {
 
             const username = this.username.value;
-            const amount = this.amount.value;
+            //const amount = this.amount.value;
             const model = this.model.value;
-            const build_in = this.build_in.checked;
-            const delivery = document.querySelector('input[name="type_delivery"]:checked')?.value;
+            //const build_in = this.build_in.checked;
+            //const delivery = document.querySelector('input[name="type_delivery"]:checked')?.value;
 
             const formdata = new FormData(this);
             let output = `<div>`;
             output += `<p>Здравствуйте, ${username}, вы заказали:</p>`;
-            if (model == "desk_Ikea_cats") output += `<p>Рабочий стол Ikea с рисунком кота, в количестве ${amount}</p>`;
-            else if (model == "lamp_cat_peak") output += `<p>Лампа в виде горы котов, в количестве ${amount}</p>`;
-            else output += `<p>Стул в виде котенка, в количестве ${amount}</p>`;
+            if (model == "desk_Ikea_cats") output += `<p>Рабочий стол Ikea с рисунком кота</p>`;
+            else if (model == "lamp_cat_peak") output += `<p>Лампа в виде горы котов</p>`;
+            else output += `<p>Стул в виде котенка</p>`;
             
+            /*
             if (build_in) output+= `<p>Сборка включена</p>`;
             else output += `<p>Сборка не включена</p>`;
 
             if (delivery == "shop") output+= `<p>Доставка: Самовывоз из магазина</p>`;
             else if (delivery == "post") output+= `<p>Доставка: Доставка почтой</p>`;
             else output+= `<p>Доставка: Доставка курьером</p>`;
-
+            */
             output += `<p>Спасибо за заказ!</p>`;
 
             document.getElementById("result").innerHTML = output;
