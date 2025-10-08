@@ -11,8 +11,8 @@
         if(file_exists("data.txt")){
             $lines = file("data.txt", FILE_IGNORE_NEW_LINES);
             foreach($lines as $line){
-                list($name, $model) = explode(";", $line);
-                echo "<li>$name ($model)</li>";
+                list($name, $email) = explode(";", $line);
+                echo "<li>$name ($email)</li>";
             }
         } else {
             echo "<li>Данных нет</li>";
