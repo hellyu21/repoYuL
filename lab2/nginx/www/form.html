@@ -6,7 +6,7 @@
 </head>
 <body>
     <h1>Заказ мебели</h1>
-    <form id="myForm">
+    <form id="myForm" action="process.php" method="POST">
         <input type="text" name="username" placeholder="Введите ФИО"><br>
         <input type="number" name="amount" placeholder="Введите количество"><br>
         <select name="model">
@@ -21,20 +21,16 @@
         <button type="submit">Заказать</button>
     </form>
     <div id="result"></div>
+
+
     <script>
         document.getElementById("myForm").addEventListener("submit", function(e) {
-            e.preventDefault();
 
             const username = this.username.value;
             const amount = this.amount.value;
             const model = this.model.value;
             const build_in = this.build_in.checked;
             const delivery = document.querySelector('input[name="type_delivery"]:checked')?.value;
-
-            if (!username || !amount || !model || !delivery) {
-                alert("Пожалуйста, заполните все обязательные поля");
-            return;
-        }
 
             const formdata = new FormData(this);
             let output = `<div>`;
