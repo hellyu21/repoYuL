@@ -19,6 +19,11 @@
     <?php unset($_SESSION['errors']); ?>
 <?php endif; ?>
 
+<?php if (isset($_SESSION['api_data'])): ?>
+    <h3>Данные из API:</h3>
+    <pre><?php print_r($_SESSION['api_data']); ?></pre>
+    
+<?php endif; ?>
 
 <a href="form.html">Заполнить форму</a>
 <a href="view.php">Посмотреть все данные</a>

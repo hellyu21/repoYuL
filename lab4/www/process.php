@@ -1,12 +1,18 @@
 <?php
 session_start();
+require_once 'ApiClient.php';
 
 $username = htmlspecialchars($_POST['username']);
 $email = htmlspecialchars($_POST['email'] ?? '');
+$api = new ApiClient();
+$url = 'https://dummyjson.com/products/category/furniture';
+$apiData = $api->request($url);
+
 
 $_SESSION['username'] = $username;
 $_SESSION['email'] = $email;
 
+$_SESSION['api_data'] = $apiData;
 
 $errors = [];
 if(empty($username)) $errors[] = "Имя не может быть пустым";

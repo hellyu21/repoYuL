@@ -1,4 +1,6 @@
 {
+    "name": "elenka/www",
+    "type": "stable",
     "require": {
         "guzzlehttp/guzzle": "*"
     }
