@@ -1,4 +1,11 @@
 <?php session_start(); ?>
+<?php require_once 'UserInfo.php'; ?>
+
+<?php $info = UserInfo::getInfo(); ?>
+<h3>Информация о пользователе:</h3>
+<?php foreach ($info as $key => $val): ?>
+    <?= htmlspecialchars($key) ?> : <?= htmlspecialchars($val) ?><br>
+<?php endforeach; ?>
 
 <?php if(isset($_SESSION['username'])): ?>
     <p>Данные из сессии:</p>
