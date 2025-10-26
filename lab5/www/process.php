@@ -1,32 +1,16 @@
 <?php
-session_start();
-require_once 'ApiClient.php';
+require 'db.php';
+require 'Pet.php';
 
-$username = htmlspecialchars($_POST['username']);
-$email = htmlspecialchars($_POST['email'] ?? '');
-$api = new ApiClient();
-$url = 'https://dummyjson.com/products/category/furniture';
-$apiData = $api->request($url);
+$pet = new Pet($pdo);
 
+$owner_name = htmlspecialchars($_POST['owner_name']);
+$pet_age = intval($_POST['pet_age']);
+$pet_type = htmlspecialchars($_POST['pet_type'] ?? '');
+$has_vaccinations = isset($_POST['has_vaccinations']) ? 1 : 0;
+$pet_gender = $_POST['pet_gender'] ?? '';
 
-$_SESSION['username'] = $username;
-$_SESSION['email'] = $email;
-
-$_SESSION['api_data'] = $apiData;
-
-$errors = [];
-if(empty($username)) $errors[] = "Имя не может быть пустым";
-if(!filter_var($email, FILTER_VALIDATE_EMAIL)) $errors[] = "Некорректный email";
-
-if(!empty($errors)){
-    $_SESSION['errors'] = $errors;
-    header("Location: index.php");
-    exit();
-}
-
-setcookie("last_submission", date('Y-m-d H:i:s'), time() + 3600, "/");
+$pet->add($owner_name, $pet_age, $pet_type, $has_vaccinations, $pet_gender);
 
 header("Location: index.php");
-$line = $username . ";" . $email . "\n";
-file_put_contents("data.txt", $line, FILE_APPEND);
 exit();
