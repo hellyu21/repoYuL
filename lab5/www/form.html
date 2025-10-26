@@ -5,27 +5,20 @@
     <title>Formmmm</title>
 </head>
 <body>
-    <h1>Заказ мебели</h1>
-    <form id="myForm" action="process.php" и method="POST">
-        <input type="text" name="username" placeholder="Введите ФИО"><br>
-        <input type="email" name="email" placeholder="Ваш email">\
-        <button type="submit">Отправить</button>
-    </form>
+    <h1>Регистрация питомца</h1>
+    <form id="myForm" action="process.php" method="POST">
+        <input type="text" name="owner_name" placeholder="Введите ФИО"><br>
+        <input type="number" name="pet_age" placeholder="Введите возраст питомца"><br>
+        <select name="pet_type">
+            <option value="cat">Кот</option>
+            <option value="dog">Собака</option>
+            <option value="capibara">Капибара</option>
+            <option value="parrot">Попуг</option>
+        </select><br>
+        <input type="checkbox" name="has_vaccinations"> Вакцинация <br>
+        <input type="radio" name="pet_gender" value="male"> Мужской<br>
+        <input type="radio" name="pet_gender" value="female"> Женский<br>
+        <button type="submit">Зарегистрировать</button>
     <div id="result"></div>
-
-
-    <script>
-        document.getElementById("myForm").addEventListener("submit", function(e) {
-
-            const username = this.username.value;
-            const email = this.email.value;
-
-            const formdata = new FormData(this);
-            let output = `<div>`;
-            output += `<p>Здравствуйте, ${username}, вы указали свой email как: ${email}</p>`;
-
-            document.getElementById("result").innerHTML = output;
-        });
-    </script>
 </body>
 </html>
