@@ -1,36 +1,21 @@
-<?php session_start(); ?>
-<?php require_once 'UserInfo.php'; ?>
+<?php
 
-<?php $info = UserInfo::getInfo(); ?>
-<h3>Информация о пользователе:</h3>
-<?php foreach ($info as $key => $val): ?>
-    <?= htmlspecialchars($key) ?> : <?= htmlspecialchars($val) ?><br>
-<?php endforeach; ?>
+require 'vendor/autoload.php';
 
-<?php if(isset($_SESSION['username'])): ?>
-    <p>Данные из сессии:</p>
-    <ul>
-        <li>Имя: <?= $_SESSION['username'] ?></li>
-        <li>Email: <?= $_SESSION['email'] ?></li>
-    </ul>
-<?php else: ?>
-    <p>Данных пока нет.</p>
-<?php endif; ?>
+use App\RedisExample;
+//use App\ElasticExample;
+//use App\ClickhouseExample;
 
-<?php if(isset($_SESSION['errors'])): ?>
-    <ul style="color:red;">
-        <?php foreach($_SESSION['errors'] as $error): ?>
-            <li><?= $error ?></li>
-        <?php endforeach; ?>
-    </ul>
-    <?php unset($_SESSION['errors']); ?>
-<?php endif; ?>
+// Redis
+$redis = new RedisExample();
+echo $redis->setValue('user:101', json_encode(['name' => 'Alice', 'age' => 25]));
+echo $redis->getValue('user:101');
 
-<?php if (isset($_SESSION['api_data'])): ?>
-    <h3>Данные из API:</h3>
-    <pre><?php print_r($_SESSION['api_data']); ?></pre>
-    
-<?php endif; ?>
+// Elasticsearch
+//$elastic = new ElasticExample();
+//echo $elastic->indexDocument('books', 1, ['title' => '1984', 'author' => 'Orwell']);
+//echo $elastic->search('books', ['author' => 'Orwell']);
 
-<a href="form.html">Заполнить форму</a>
-<a href="view.php">Посмотреть все данные</a>
+// ClickHouse
+//$click = new ClickhouseExample();
+//echo $click->query('SELECT count() FROM system.tables');
