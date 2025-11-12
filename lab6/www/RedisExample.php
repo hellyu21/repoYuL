@@ -2,26 +2,49 @@
 
 namespace App;
 
-use App\Helpers\ClientFactory;
-
 class RedisExample
 {
-    private $client;
+    private $redis;
 
     public function __construct()
     {
-        $this->client = ClientFactory::make('http://localhost:7379/'); // redis-commander proxy
+        $this->redis = new \Redis();
+        $this->redis->connect('redis', 6379);
+        $this->redis->ping();
     }
 
     public function setValue($key, $value)
     {
-        $response = $this->client->get("SET/$key/$value");
-        return $response->getBody()->getContents();
+        return $this->redis->set($key, $value);
     }
 
     public function getValue($key)
     {
-        $response = $this->client->get("GET/$key");
-        return $response->getBody()->getContents();
+        return $this->redis->get($key);
+    }
+
+    public function deleteValue($key)
+    {
+        return $this->redis->del($key);
+    }
+
+    public function getAllKeys($pattern = '*')
+    {
+        return $this->redis->keys($pattern);
+    }
+
+    public function addToList($key, $value)
+    {
+        return $this->redis->rPush($key, $value);
+    }
+
+    public function getList($key)
+    {
+        return $this->redis->lRange($key, 0, -1);
+    }
+
+    public function removeFromList($key, $value)
+    {
+        return $this->redis->lRem($key, $value, 0);
     }
 }
