@@ -1,0 +1,11 @@
+{
+  "require": {
+    "php-amqplib/php-amqplib": "^3.2",
+    "arnaud-lb/php-rdkafka": "^6.0"
+  },
+  "config": {
+    "platform": {
+      "php": "8.2"
+    }
+  }
+}
